@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { JeopardyService } from './jeopardy.service';
 
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,20 +15,26 @@ export class AppComponent implements OnInit {
 
   constructor(private jeopardyService: JeopardyService){}
 
+  //method that uses the jeopardy service from API
   getDataFromService(){
     this.jeopardyService.getQuestionInfo()
     .subscribe(
       questionInfo => {
         this.questionInfo = questionInfo[0];
+        console.log(this.questionInfo.answer)
       }
     )
   }
 
+  answerAlert(response: string) {
+    alert(response)
+  }
 
-ngOnInit(){
-  this.getDataFromService()
+  //call API when component loads to get initial data
+  ngOnInit(){
+    this.getDataFromService()
+  }
 }
 
 
-}
 

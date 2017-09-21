@@ -1,5 +1,31 @@
+<!-- comment starts here
 
-<!-- {{questionInfo | json}} -->
+  <b>the question is: </b> {{questionInfo?.question}}
+  <br>
+  <b>the category is: </b> {{questionInfo?.category?.title}}
+    **putting a question mark in here because you're going one level deepr to keep it from 
+    **complaining. It would be calling it on something that doesn't exist.
+  <br>
+  <br>
+  <b>the point value is: </b> {{questionInfo?.value}}
+
+  <input [(ngModel)]="userAnswer" type="text">&nbsp;<button (click)="checkAnswer" >Submit</button>
+
+      ** &nbsp; = non-breaking space
+
+  <br>
+  
+  Score: {{userScore}}
+
+      
+
+***^could wrap this question in a div if we don't want ? marks:
+    <div *ngIf="questionInfo">
+      **this would say, "don't show this div if we don't have quesitonInfo"
+
+ends here -->
+
+
 
 
 <!--The content below is only a placeholder and can be replaced.-->
@@ -8,33 +34,19 @@
     Welcome to {{title}}!
   </h1>
 </div>
-<h2>
-  The question is: 
-</h2>
-  <p>
-  {{questionInfo?.question}}
-  </p>
-<h2>Category</h2>
-  <p>
-  {{questionInfo?.category.title}}
-  </p>
-<h2>Point Value</h2>
-  <p>
-  {{questionInfo?.value}}
-  </p>
+  <h2>
+    The question is: 
+  </h2>
+    <p>
+    {{questionInfo?.question}}
+    </p>
+  <h2>Category</h2>
+    <p>
+    {{questionInfo?.category.title}}
+    </p>
+  <h2>Point Value</h2>
+    <p>
+    {{questionInfo?.value}}
+    </p>
 
-<textarea name="userAnswer" id="userAnswer"></textarea>
-<button (click)="onClickMe()">Answer Here</button>
-
-<br>
-<br>
-
-<span>
-  SCORE: {{score}}
-</span>
-<br>
-<br>
-  
-  <p>
-  Answer: {{questionInfo?.answer}}
-  </p>
+<app-button (checkedAnswer)="answerAlert($event)" [questionInfo]="questionInfo"></app-button>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-button',
@@ -7,17 +7,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ButtonComponent implements OnInit {
 
+userScore: number = 0;
+userAnswer: string;
+@Input() questionInfo;
+@Output() checkedAnswer = new EventEmitter<string>();
+
   constructor() { }
 
-
-  // clickMessage;
-  
-  // onClickMe() {
-  //   this.clickMessage = 'You are my hero!';
-  // }
-
-
   ngOnInit() {
+  }
+
+  checkAnswer() {
+    if(this.userAnswer == this.questionInfo.answer) {
+      this.userScore += this.questionInfo.value;
+    }
+    this.userAnswer = "";
+    this.checkedAnswer.emit("You submitted an answer!");
   }
 
 }
